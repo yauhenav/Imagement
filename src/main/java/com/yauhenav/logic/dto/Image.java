@@ -13,7 +13,6 @@ public class Image {
     private String title;
     private String description;
     private int user_id;
-    private int tag_id;
     private byte[] file;
 
     public Image () {
@@ -25,7 +24,6 @@ public class Image {
         this.title = title;
         this.description = description;
         this.user_id = user_id;
-        this.tag_id = tag_id;
         this.file = file;
     }
 
@@ -70,16 +68,6 @@ public class Image {
     }
 
     @Basic
-    @Column(name = "tag_id")
-    public int getTag_id() {
-        return tag_id;
-    }
-
-    public void setTag_id (int tag_id) {
-        this.tag_id = tag_id;
-    }
-
-    @Basic
     @Column(name = "file")
     public byte[] getFile() {
         return file;
@@ -91,7 +79,7 @@ public class Image {
 
     @Override
     public String toString () {
-        return "[Image name: " + this.title + ", owner: " + this.user_id + ", tag: " + this.tag_id + ", id No.: " + this.id + "]";
+        return "[Image name: " + this.title + ", owner: " + this.user_id + ", tag: " + ", id No.: " + this.id + "]";
     }
 
 }

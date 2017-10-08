@@ -17,6 +17,7 @@
         <mapping class="com.yauhenav.logic.dto.User"/>
         <mapping class="com.yauhenav.logic.dto.Tag"/>
         <mapping class="com.yauhenav.logic.dto.Image"/>
+        <mapping class="com.yauhenav.logic.dto.Tagger"/>
 
 </session-factory>
 </hibernate-configuration>
