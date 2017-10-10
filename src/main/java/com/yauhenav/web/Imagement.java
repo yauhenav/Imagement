@@ -20,9 +20,17 @@ import com.yauhenav.logic.exception.*;
 public class Imagement extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-        PrintWriter pw = resp.getWriter();
+        PrintWriter pw;
         try {
             HttpSession sessionObject = req.getSession(true);
+            Service serviceObject = (Service) sessionObject.getAttribute("sessionObject");
+            resp.setContentType("text/html;charset=utf-8");
+            pw = resp.getWriter();
+            String action = req.getParameter("action");
+
+            switch (action) {
+                case ""
+            }
 
         }
     }
