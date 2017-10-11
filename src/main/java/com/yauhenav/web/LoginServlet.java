@@ -17,21 +17,12 @@ import com.yauhenav.logic.exception.*;
 /**
  * Created by yauhenav on 9.10.17.
  */
-public class Imagement extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        PrintWriter pw;
-        try {
-            HttpSession sessionObject = req.getSession(true);
-            Service serviceObject = (Service) sessionObject.getAttribute("sessionObject");
-            resp.setContentType("text/html;charset=utf-8");
-            pw = resp.getWriter();
-            String action = req.getParameter("action");
+        throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter pw = resp.getWriter();
+        req.getRequestDispatcher("link.html").include(req, resp);
 
-            switch (action) {
-                case ""
-            }
-
-        }
-    }
-}
+        String name = req.getParameter("username");
+        String pass = req.getParameter("userpass")
