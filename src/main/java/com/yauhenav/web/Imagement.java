@@ -1,4 +1,4 @@
-package com.yauhenav.logic.web;
+package com.yauhenav.web;
 
 import java.io.*;
 import java.util.*;
@@ -21,17 +21,17 @@ public class Imagement extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         PrintWriter pw;
-        try {
+
             HttpSession sessionObject = req.getSession(true);
             Service serviceObject = (Service) sessionObject.getAttribute("sessionObject");
-            resp.setContentType("text/html;charset=utf-8");
+            resp.setContentType("text/html,charset=utf-8");
             pw = resp.getWriter();
             String action = req.getParameter("action");
 
             switch (action) {
-                case ""
+                case "":
             }
+
 
         }
     }
-}

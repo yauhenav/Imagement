@@ -1,4 +1,4 @@
-package com.yauhenav.logic.web;
+package com.yauhenav.web;
 
 import java.io.*;
 import java.util.*;
@@ -19,10 +19,30 @@ import com.yauhenav.logic.exception.*;
  */
 public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
+        Service servObj = null;
         resp.setContentType("text/html");
         PrintWriter pw = resp.getWriter();
-        req.getRequestDispatcher("link.html").include(req, resp);
+try {
+    servObj = new Service();
+} catch (ServiceException exc) {
+    exc.printStackTrace();
+}
 
         String name = req.getParameter("username");
-        String pass = req.getParameter("userpass")
+        String pass = req.getParameter("userpass");
+
+        User temporUser = new User(-1, name, null, pass);
+        try {
+            if (servObj.validate(temporUser)) {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome-page.jsp");
+                dispatcher.forward(req, resp);
+            }
+        } catch (ServiceException exc) {
+            exc.printStackTrace();
+        }
+    }
+}
+
+
+

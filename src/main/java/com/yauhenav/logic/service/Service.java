@@ -17,10 +17,19 @@ public class Service {
     private MySqlUserDao msud = null;
 
     public Service() throws ServiceException {
-        try {
-            SessionFactory factory = SessionUtilProd.getSessionFactory();
-            msud = new MySqlUserDao(factory);
+        SessionFactory factory = SessionUtilProd.getSessionFactory();
+        msud = new MySqlUserDao(factory);
+    }
 
+    public boolean validate (User user) throws ServiceException {
+        try {
+            return msud.validateUser(user);
+        } catch (DaoException exc) {
+            throw new ServiceException("Exception caught in Service object");
         }
     }
-}
+
+
+
+
+ }

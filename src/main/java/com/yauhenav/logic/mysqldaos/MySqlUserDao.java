@@ -42,7 +42,7 @@ public class MySqlUserDao {
         }
     }
 
-    public User readByUsername (User user) throws DaoException {
+    private User readByUsername (User user) throws DaoException {
         Session session = null;
         try {
             session = factory.openSession();
@@ -58,5 +58,16 @@ public class MySqlUserDao {
         }
     }
 
+    public boolean validateUser (User user) throws DaoException {
 
-}
+            boolean status = false;
+            String username = user.getUsername();
+            String password = user.getPassword();
+
+            User tempUser = this.readByUsername(user);
+            if (username.equals(tempUser.getUsername())&&password.equals(tempUser.getPassword())) {
+                status = true;
+            }
+            return status;
+        }
+    }

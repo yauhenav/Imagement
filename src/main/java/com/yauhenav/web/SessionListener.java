@@ -1,6 +1,7 @@
-package com.yauhenav.logic.web;
+package com.yauhenav.web;
 
 import com.yauhenav.logic.exception.ServiceException;
+import com.yauhenav.logic.service.*;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -21,13 +22,13 @@ public class SessionListener implements HttpSessionListener {
         }
     }
     public void sessionDestroyed(HttpSessionEvent e) {
-        try {
+        //try {
             HttpSession sessionObject = e.getSession();
             Service serviceObject = (Service) sessionObject.getAttribute("sessionObject");
-            serviceObject.close();
+            //serviceObject.close();
             sessionObject.removeAttribute("sessionObject");
-        } catch (ServiceException exc) {
-            exc.printStackTrace();
-        }
+        //} catch (ServiceException exc) {
+        //    exc.printStackTrace();
+        //}
     }
 }
