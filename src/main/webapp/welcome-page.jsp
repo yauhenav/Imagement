@@ -11,8 +11,8 @@
 <body>
 
 <%String username = (String) request.getAttribute("username");%>
-<B><%="Welcome" + username%></B>
-<a href="index.jsp">Go to Home Page</a>
+<B><%="Welcome " + username%></B>
+<a href="Imagement/index.html">Go to Home Page</a>
 
 </body>
 </html>

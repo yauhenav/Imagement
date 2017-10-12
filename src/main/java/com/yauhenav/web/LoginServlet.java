@@ -20,24 +20,27 @@ import com.yauhenav.logic.exception.*;
 public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Service servObj = null;
-        resp.setContentType("text/html");
-        PrintWriter pw = resp.getWriter();
-try {
-    servObj = new Service();
-} catch (ServiceException exc) {
-    exc.printStackTrace();
-}
-
-        String name = req.getParameter("username");
-        String pass = req.getParameter("userpass");
-
-        User temporUser = new User(-1, name, null, pass);
         try {
-            if (servObj.validate(temporUser)) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome-page.jsp");
-                dispatcher.forward(req, resp);
-            }
+            resp.setContentType("text/html");
+            PrintWriter pw = resp.getWriter();
+
+            Service servObj = new Service();
+
+
+            String name = req.getParameter("username");
+            String pass = req.getParameter("userpass");
+
+            User temporUser = new User(-1, name, null, pass);
+
+                if (servObj.validate(temporUser)) {
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome-page.jsp");
+                    dispatcher.forward(req, resp);
+                } else {
+                    pw.println("<font color=\"red\">You've entered invalid ID value, " +
+                            "go back and enter a valid ID</font>");
+                    pw.println("<a href=\"index.html\">Go to Home Page</a>");
+                }
+
         } catch (ServiceException exc) {
             exc.printStackTrace();
         }
