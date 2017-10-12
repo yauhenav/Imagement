@@ -2,6 +2,14 @@ CREATE DATABASE `imagement` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 USE `imagement`;
 
+CREATE TABLE `users` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
 CREATE TABLE `images` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `title` varchar(64) NOT NULL,
@@ -30,13 +38,24 @@ CREATE TABLE `tags` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `users` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+INSERT INTO `imagement`.`users` (`id`, `username`, `email`, `password`) VALUES ('1', 'yauhenav', 'yauhenav@testmail.com', 'Mypassword1');
+INSERT INTO `imagement`.`users` (`id`, `username`, `email`, `password`) VALUES ('2', 'monalina', 'monalina@testmail.com', 'Mypassword2');
+INSERT INTO `imagement`.`users` (`id`, `username`, `email`, `password`) VALUES ('11', 'lilula', 'lilula@testmail.com', 'Mypassword3');
 
+INSERT INTO `imagement`.`images` (`id`, `title`, `description`, `user_id`) VALUES ('1', 'my_portrait', 'Me looking over horizons', '1');
+INSERT INTO `imagement`.`images` (`id`, `title`, `description`, `user_id`) VALUES ('2', 'africa_animal', 'Elephant walking around the road in Africa', '1');
+INSERT INTO `imagement`.`images` (`id`, `title`, `description`, `user_id`) VALUES ('3', 'animal_four', 'Another animal in Africa', '1');
 
+INSERT INTO `imagement`.`tags` (`id`, `tagword`) VALUES ('1', 'human');
+INSERT INTO `imagement`.`tags` (`id`, `tagword`) VALUES ('2', 'tree');
+INSERT INTO `imagement`.`tags` (`id`, `tagword`) VALUES ('3', 'house');
+INSERT INTO `imagement`.`tags` (`id`, `tagword`) VALUES ('4', 'elephant');
+INSERT INTO `imagement`.`tags` (`id`, `tagword`) VALUES ('5', 'dog');
 
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('1', '1', '1');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('2', '1', '2');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('3', '1', '3');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('4', '1', '4');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('5', '1', '5');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('6', '2', '4');
+INSERT INTO `imagement`.`taggers` (`id`, `image_id`, `tag_id`) VALUES ('7', '2', '3');
