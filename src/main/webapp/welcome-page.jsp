@@ -12,7 +12,7 @@
 
 <%String username = (String) request.getAttribute("username");%>
 <B><%="Welcome " + username%></B>
-<a href="Imagement/index.html">Go to Home Page</a>
+<a href="/Imagement/index.html">Go to Home Page</a>
 
 </body>
 </html>

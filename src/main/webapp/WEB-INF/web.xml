@@ -16,19 +16,19 @@
   </servlet>
 
   <servlet>
-    <display-name>Imagement</display-name>
-    <servlet-name>Imagement</servlet-name>
-    <servlet-class>com.yauhenav.web.Imagement</servlet-class>
+    <display-name>Management</display-name>
+    <servlet-name>Management</servlet-name>
+    <servlet-class>com.yauhenav.web.Management</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/servlet/LoginServlet</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>Imagement</servlet-name>
-    <url-pattern>/servlet/Imagement</url-pattern>
+    <servlet-name>Management</servlet-name>
+    <url-pattern>/manage</url-pattern>
   </servlet-mapping>
 
 

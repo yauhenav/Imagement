@@ -17,7 +17,7 @@ import com.yauhenav.logic.exception.*;
 /**
  * Created by yauhenav on 9.10.17.
  */
-public class Imagement extends HttpServlet {
+public class Management extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         PrintWriter pw;
