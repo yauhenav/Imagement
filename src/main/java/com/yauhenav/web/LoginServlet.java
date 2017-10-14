@@ -33,7 +33,9 @@ public class LoginServlet extends HttpServlet {
             User temporUser = new User(-1, name, null, pass);
 
                 if (servObj.validate(temporUser)) {
+                    req.setAttribute("username", temporUser.getUsername());
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome-page.jsp");
+                    //dispatcher.include(req, resp);
                     dispatcher.forward(req, resp);
                 } else {
                     pw.println("<font color=\"red\">You've entered invalid ID value, " +
