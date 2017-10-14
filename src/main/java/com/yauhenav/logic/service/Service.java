@@ -21,15 +21,19 @@ public class Service {
         msud = new MySqlUserDao(factory);
     }
 
-    public boolean validate (User user) throws ServiceException {
+    public boolean checkIfUserExists (User user) throws ServiceException {
         try {
-            return msud.validateUser(user);
+            return msud.checkIfUserExistsInDataBase(user);
         } catch (DaoException exc) {
             throw new ServiceException("Exception caught in Service object");
         }
     }
 
-
-
-
- }
+    public boolean checkIfUsersPasswordCorresponds (User user) throws ServiceException {
+        try {
+            return msud.validateIfExistingUsersPasswordIsCorrect(user);
+        } catch (DaoException exc) {
+            throw new ServiceException("Exception caught in Service object");
+        }
+    }
+}

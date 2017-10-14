@@ -32,16 +32,22 @@ public class LoginServlet extends HttpServlet {
 
             User temporUser = new User(-1, name, null, pass);
 
-                if (servObj.validate(temporUser)) {
+            if (servObj.checkIfUserExists(temporUser)) {
+                if (servObj.checkIfUsersPasswordCorresponds(temporUser)) {
                     req.setAttribute("username", temporUser.getUsername());
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome-page.jsp");
                     //dispatcher.include(req, resp);
                     dispatcher.forward(req, resp);
                 } else {
-                    pw.println("<font color=\"red\">You've entered invalid ID value, " +
-                            "go back and enter a valid ID</font>");
+                    pw.println("<br><font color=\"red\">You've entered invalid password, " +
+                            "go back and enter a valid password</font><br><br>");
                     pw.println("<a href=\"index.html\">Go to Home Page</a>");
                 }
+            } else {
+                pw.println("<br><font color=\"red\">The user with such username does not exist, " +
+                        "please sign up first</font><br><br>");
+                pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
+            }
 
         } catch (ServiceException exc) {
             exc.printStackTrace();

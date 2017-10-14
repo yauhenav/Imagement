@@ -58,16 +58,27 @@ public class MySqlUserDao {
         }
     }
 
-    public boolean validateUser (User user) throws DaoException {
-
-            boolean status = false;
-            String username = user.getUsername();
-            String password = user.getPassword();
-
-            User tempUser = this.readByUsername(user);
-            if (username.equals(tempUser.getUsername())&&password.equals(tempUser.getPassword())) {
+    public boolean checkIfUserExistsInDataBase (User user) throws DaoException {
+        boolean status = false;
+        try {
+            if (this.readByUsername(user) != null) {
                 status = true;
             }
-            return status;
+        } catch (NullPointerException exc) {
+            exc.printStackTrace();
         }
+        return status;
     }
+
+    public boolean validateIfExistingUsersPasswordIsCorrect (User user) throws DaoException {
+        boolean status = false;
+        String username = user.getUsername();
+        String password = user.getPassword();
+
+        User tempUser = this.readByUsername(user);
+        if (username.equals(tempUser.getUsername())&&password.equals(tempUser.getPassword())) {
+            status = true;
+        }
+        return status;
+    }
+}
