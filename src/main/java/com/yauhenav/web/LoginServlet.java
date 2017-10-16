@@ -24,8 +24,8 @@ public class LoginServlet extends HttpServlet {
             resp.setContentType("text/html");
             PrintWriter pw = resp.getWriter();
 
-            Service servObj = new Service();
-
+            HttpSession sessionObject = req.getSession(true);
+            Service servObj = (Service) sessionObject.getAttribute("sessionObject");
 
             String name = req.getParameter("username");
             String pass = req.getParameter("userpass");
