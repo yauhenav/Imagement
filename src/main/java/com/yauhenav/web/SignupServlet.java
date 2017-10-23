@@ -19,6 +19,13 @@ import com.yauhenav.logic.exception.*;
 public class SignupServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
+        /*Enumeration<String> params = req.getParameterNames();
+        while(params.hasMoreElements()){
+            String paramName = params.nextElement();
+            System.out.println("Parameter Name - "+paramName+", Value - "+req.getParameter(paramName));
+        }*/
+
         try {
             resp.setContentType("text/html");
             PrintWriter pw = resp.getWriter();
@@ -27,7 +34,38 @@ public class SignupServlet extends HttpServlet {
             Service servObj = (Service) sessionObject.getAttribute("sessionObject");
 
 
+            String name = req.getParameter ("username");
+            String pass = req.getParameter("userpass");
+            String confirmPass = req.getParameter("confirmeduserpass");
+            String email = req.getParameter("email");
+            int id;
+            System.out.println("before 1 condition");
+            if (pass.equals(confirmPass)) {
+                System.out.println("passwords coinside in 1 condition<br>");
+                if (email.matches("([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})")) {
+                    System.out.println("email id OK in 2 condition");
+                    if (pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+                        System.out.println("password is OK in 3 condition");
+                        if (name.matches("^(?=.{5,10}$)(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")) {
+                            System.out.println("name is OK in 4 condition");
+                            id = servObj.assignIdToUser();
+                            User tempUser = new User (id, name, email, pass);
+                            servObj.createNewUser(tempUser);
+                            //req.setAttribute("username", tempUser.getUsername());
+                            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+                            //dispatcher.include(req, resp);
+                            dispatcher.forward(req, resp);
+                        }
+                    }
+                }
+            }
 
+
+            /*} else {
+                pw.print("<font color=\"red\">You've entered invalid username or password, " +
+                        "go back and enter valid username and password</font><br><br>");
+                pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
+            }*/
 
 
         } catch (ServiceException exc) {

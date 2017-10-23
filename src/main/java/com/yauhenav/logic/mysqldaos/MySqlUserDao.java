@@ -42,6 +42,22 @@ public class MySqlUserDao {
         }
     }
 
+    public List<User> readAllUsers () throws DaoException {
+        Session session = null;
+        try {
+            session = factory.openSession();
+            Query query = session.createQuery("from User u");
+            List<User> lst = query.list();
+            return lst;
+        } catch (HibernateException exc) {
+            throw new DaoException("Exception in MySqlUserDao object", exc);
+        } finally {
+            if (session!=null) {
+                session.close();
+            }
+        }
+    }
+
     private User readByUsername (User user) throws DaoException {
         Session session = null;
         try {
@@ -81,4 +97,22 @@ public class MySqlUserDao {
         }
         return status;
     }
+
+
+
+    // This method should return an integer to be assigned as next user's id
+    public int assignIdToNextUser () {
+        int currentMax;
+        User maxUserId = null;
+        try {
+            List lst = this.readAllUsers();
+            maxUserId = Collections.max(lst, new UserCompar());
+        } catch (DaoException exc) {
+            exc.printStackTrace();
+        }
+        currentMax = maxUserId.getId();
+        return ++currentMax;
+    }
+
+
 }
