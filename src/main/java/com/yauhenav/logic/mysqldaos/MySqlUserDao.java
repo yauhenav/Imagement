@@ -42,7 +42,7 @@ public class MySqlUserDao {
         }
     }
 
-    public List<User> readAllUsers () throws DaoException {
+    private List<User> readAllUsers () throws DaoException {
         Session session = null;
         try {
             session = factory.openSession();
