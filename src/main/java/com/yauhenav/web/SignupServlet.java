@@ -40,33 +40,38 @@ public class SignupServlet extends HttpServlet {
             String email = req.getParameter("email");
             int id;
             System.out.println("before 1 condition");
-            if (pass.equals(confirmPass)) {
-                System.out.println("passwords coinside in 1 condition<br>");
-                if (email.matches("([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})")) {
-                    System.out.println("email id OK in 2 condition");
-                    if (pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
-                        System.out.println("password is OK in 3 condition");
-                        if (name.matches("^(?=.{5,10}$)(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")) {
-                            System.out.println("name is OK in 4 condition");
+            if (name.matches("^(?=.{5,10}$)(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")) {
+                if (pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+                    if (email.matches("([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})")) {
+                        if (pass.equals(confirmPass)) {
                             id = servObj.assignIdToUser();
                             User tempUser = new User (id, name, email, pass);
                             servObj.createNewUser(tempUser);
-                            //req.setAttribute("username", tempUser.getUsername());
                             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
-                            //dispatcher.include(req, resp);
                             dispatcher.forward(req, resp);
+                        } else {
+                            pw.print("<font color=\"red\">Passwords you entered do not match, " +
+                                    "go back to signup page and enter matching passwords</font><br><br>");
+                            pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
                         }
+
+                    } else {
+                        pw.print("<font color=\"red\">You've entered invalid email, " +
+                                "go back to signup page and enter a valid email</font><br><br>");
+                        pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
                     }
+
+                } else {
+                    pw.print("<font color=\"red\">You've entered invalid password, " +
+                            "go back to signup page and enter a valid password</font><br><br>");
+                    pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
                 }
-            }
 
-
-            /*} else {
-                pw.print("<font color=\"red\">You've entered invalid username or password, " +
-                        "go back and enter valid username and password</font><br><br>");
+            } else {
+                pw.print("<font color=\"red\">You've entered invalid username, " +
+                        "go back to signup page and enter a valid username</font><br><br>");
                 pw.println("<a href=\"signup.html\">Go to Sign Up Page</a>");
-            }*/
-
+            }
 
         } catch (ServiceException exc) {
             exc.printStackTrace();
