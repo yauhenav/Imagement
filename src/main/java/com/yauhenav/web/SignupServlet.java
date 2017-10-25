@@ -39,7 +39,7 @@ public class SignupServlet extends HttpServlet {
             String confirmPass = req.getParameter("confirmeduserpass");
             String email = req.getParameter("email");
             int id;
-            System.out.println("before 1 condition");
+
             if (name.matches("^(?=.{5,10}$)(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")) {
                 if (pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
                     if (email.matches("([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})")) {
