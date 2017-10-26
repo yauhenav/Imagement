@@ -15,10 +15,12 @@ import javax.servlet.ServletException;
 public class Service {
 
     private MySqlUserDao msud = null;
+    private MySqlImageDao msid = null;
 
     public Service() throws ServiceException {
         SessionFactory factory = SessionUtilProd.getSessionFactory();
         msud = new MySqlUserDao(factory);
+        msid = new MySqlImageDao(factory);
     }
 
     public boolean checkIfUserExists (User user) throws ServiceException {
@@ -48,5 +50,15 @@ public class Service {
             throw new ServiceException ("Exception caught in Service object", exc);
         }
     }
+
+    public void createNewImage (Image image) throws ServiceException {
+        try {
+            msid.create(image);
+        } catch (DaoException exc) {
+            throw new ServiceException("Exception caught in Service object", exc);
+        }
+    }
+
+
 
 }

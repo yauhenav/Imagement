@@ -22,6 +22,12 @@
   </servlet>
 
   <servlet>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.yauhenav.web.UploadServlet</servlet-class>
+  </servlet>
+
+  <servlet>
     <display-name>Management</display-name>
     <servlet-name>Management</servlet-name>
     <servlet-class>com.yauhenav.web.Management</servlet-class>
@@ -35,6 +41,11 @@
   <servlet-mapping>
     <servlet-name>SignupServlet</servlet-name>
     <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

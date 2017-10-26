@@ -1,6 +1,8 @@
 package com.yauhenav.logic.dto;
 
 import javax.persistence.*;
+import java.io.InputStream;
+import java.sql.Blob;
 
 /**
  * Created by yauhenav on 1.10.17.
@@ -19,7 +21,7 @@ public class Image {
 
     }
 
-    public Image (int id, String title, String description, int user_id, int tag_id, byte[] file) {
+    public Image (int id, String title, String description, int user_id, byte[] file) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -67,8 +69,8 @@ public class Image {
         this.user_id = user_id;
     }
 
-    @Basic
-    @Column(name = "file")
+    @Lob
+    @Column (name = "file")
     public byte[] getFile() {
         return file;
     }
