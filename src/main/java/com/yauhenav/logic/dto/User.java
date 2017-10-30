@@ -25,8 +25,15 @@ public class User {
         this.password = password;
     }
 
+    public User (String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     @Id
     @Column(name = "id")
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.yauhenav;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 
 import com.yauhenav.logic.service.SessionUtilProd;
@@ -21,44 +22,38 @@ import org.testng.annotations.BeforeMethod;
 
 
 public class MySqlDaosTest {
+
+    private TestsHandler testsHandler;
     private MySqlUserDao testMSUD;
     private MySqlImageDao testMSID;
 
-/*
+
     @BeforeMethod
-    public void createTestClasses() throws DaoException {
-        SessionFactory factory = SessionUtilProd.getSessionFactory();
-        testMSUD = new MySqlUserDao(factory);
-        testMSID = new MySqlImageDao(factory);
-    }
-
-    @Test
-    public void TestCreateImageMethod() throws DaoException {
-
-
+    public void fillDBWithTestData() throws SQLException, DaoException {
         try {
-            byte [] picture = null;
-            FileInputStream inputSt = new FileInputStream("/home/yauhenav/Pictures/navitski.jpg");
+            testsHandler = new TestsHandler();
+            testsHandler.populateDataBase();
+            testMSUD = testsHandler.getMySqlUserDaoInstance();
+            testMSID = testsHandler.getMySqlImageDaoInstance();
 
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-            byte buffer[] = new byte [1024];
-            for (int length = 0; (length = inputSt.read(buffer))>0; ) {
-                output.write(buffer, 0, length);
-            }
-            picture = output.toByteArray();
-
-
-            Image testImage = new Image ("portrait", "me looking over horizons", 1, picture);
-
-            testMSID.create(testImage);
 
         } catch (DaoException exc) {
             exc.printStackTrace();
-        } catch (FileNotFoundException fnf) {
-            fnf.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
         }
-    }*/
+    }
+
+    @AfterMethod
+    public void wipeDBTestData() throws SQLException, DaoException {
+        try {
+            testsHandler.emptyDataBase();
+        } catch (DaoException exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    @Test
+    public void dummyMethod () {
+        System.out.println("Test run");
+    }
+
 }
