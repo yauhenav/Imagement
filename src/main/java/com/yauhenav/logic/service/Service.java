@@ -16,9 +16,10 @@ public class Service {
 
     private MySqlUserDao msud = null;
     private MySqlImageDao msid = null;
+    private SessionFactory factory;
 
     public Service() throws ServiceException {
-        SessionFactory factory = SessionUtilProd.getSessionFactory();
+        factory = SessionUtilProd.getSessionFactory();
         msud = new MySqlUserDao(factory);
         msid = new MySqlImageDao(factory);
     }

@@ -29,7 +29,16 @@ public class Image {
         this.file = file;
     }
 
+    public Image (String title, String description, int user_id, byte[] file) {
+
+        this.title = title;
+        this.description = description;
+        this.user_id = user_id;
+        this.file = file;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;

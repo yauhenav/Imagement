@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.servlet.annotation.MultipartConfig;
+//import org.apache.catalina.core.ApplicationPart;
 
 import com.yauhenav.logic.service.*;
 import com.yauhenav.logic.dto.*;
@@ -19,6 +21,7 @@ import sun.misc.IOUtils;
 /**
  * Created by yauhenav on 26.10.17.
  */
+@MultipartConfig(maxFileSize = 16177215)
 public class UploadServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -29,16 +32,13 @@ public class UploadServlet extends HttpServlet {
             HttpSession sessionObject = req.getSession(true);
             Service servObj = (Service) sessionObject.getAttribute("sessionObject");
 
-            String imageId = req.getParameter("newImageId");
-            int imageKey = Integer.parseInt(imageId);
-
             String imageTitle = req.getParameter("imageTitle");
             String imageDesc = req.getParameter("imageDescription");
 
             String userId = req.getParameter("userId");
             int userKey = Integer.parseInt(userId);
 
-            InputStream inputStream = null; // input stream of the upload file
+            InputStream inputStream; // input stream of the upload file
 
             // obtains the upload file part in this multipart request
             Part filePart = req.getPart("photo");
@@ -60,7 +60,7 @@ public class UploadServlet extends HttpServlet {
                 picture = output.toByteArray();
             }
 
-            Image tempImage = new Image (imageKey, imageTitle, imageDesc, userKey, picture);
+            Image tempImage = new Image (imageTitle, imageDesc, userKey, picture);
 
 
                 servObj.createNewImage(tempImage);
