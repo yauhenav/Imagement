@@ -39,11 +39,11 @@ public class Service {
             throw new ServiceException("Exception caught in Service object");
         }
     }
-
+/*
     public int assignIdToUser() {
         return msud.assignIdToNextUser();
     }
-
+*/
     public void createNewUser (User user) throws ServiceException {
         try {
             msud.create(user);

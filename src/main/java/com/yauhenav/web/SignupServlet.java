@@ -38,14 +38,13 @@ public class SignupServlet extends HttpServlet {
             String pass = req.getParameter("userpass");
             String confirmPass = req.getParameter("confirmeduserpass");
             String email = req.getParameter("email");
-            int id;
 
             if (name.matches("^(?=.{5,10}$)(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")) {
                 if (pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
                     if (email.matches("([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})")) {
                         if (pass.equals(confirmPass)) {
-                            id = servObj.assignIdToUser();
-                            User tempUser = new User (id, name, email, pass);
+                            //id = servObj.assignIdToUser();
+                            User tempUser = new User (name, email, pass);
                             servObj.createNewUser(tempUser);
                             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
                             dispatcher.forward(req, resp);

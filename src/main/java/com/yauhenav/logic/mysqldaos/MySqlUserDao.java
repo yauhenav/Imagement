@@ -4,6 +4,7 @@ import java.util.*;
 import org.hibernate.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import javax.persistence.criteria.CriteriaQuery;
 
 import com.yauhenav.logic.dto.*;
 import com.yauhenav.logic.exception.*;
@@ -42,12 +43,12 @@ public class MySqlUserDao {
         }
     }
 
-    private List<User> readAllUsers () throws DaoException {
+    public List<User> readAllUsers () throws DaoException {
         Session session = null;
         try {
             session = factory.openSession();
-            Query query = session.createQuery("from User u");
-            List<User> lst = query.list();
+            Criteria criteria = session.createCriteria(User.class);
+            List<User> lst = criteria.list();
             return lst;
         } catch (HibernateException exc) {
             throw new DaoException("Exception in MySqlUserDao object", exc);
@@ -58,7 +59,8 @@ public class MySqlUserDao {
         }
     }
 
-    private User readByUsername (User user) throws DaoException {
+
+    public User readByUsername (User user) throws DaoException {
         Session session = null;
         try {
             session = factory.openSession();
@@ -99,7 +101,7 @@ public class MySqlUserDao {
     }
 
 
-
+/*
     // This method should return an integer to be assigned as next user's id
     public int assignIdToNextUser () {
         int currentMax;
@@ -113,6 +115,6 @@ public class MySqlUserDao {
         currentMax = maxUserId.getId();
         return ++currentMax;
     }
-
+*/
 
 }
