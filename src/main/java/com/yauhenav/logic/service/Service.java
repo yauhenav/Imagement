@@ -14,15 +14,16 @@ import javax.servlet.ServletException;
  */
 public class Service {
 
-    private MySqlUserDao msud = null;
-    private MySqlImageDao msid = null;
+    private MySqlUserDao msud;
+    private MySqlImageDao msid;
     private SessionFactory factory;
 
-    public Service() throws ServiceException {
-        factory = SessionUtilProd.getSessionFactory();
-        msud = new MySqlUserDao(factory);
-        msid = new MySqlImageDao(factory);
+    public Service(MySqlUserDao msud, MySqlImageDao msid) throws ServiceException {
+        //factory = SessionUtilProd.getSessionFactory();
+        this.msud = msud;
+        this.msid = msid;
     }
+
 
     public boolean checkIfUserExists (User user) throws ServiceException {
         try {
