@@ -60,6 +60,11 @@ public class Service {
         }
     }
 
-
-
+    public Image readImageFromDB (int imageID) throws ServiceException {
+        try {
+            return msid.readByImageByID(imageID);
+        } catch (DaoException exc) {
+            throw new ServiceException("Exception caught in Service object", exc);
+        }
+    }
 }

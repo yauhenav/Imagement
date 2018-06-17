@@ -42,6 +42,21 @@ public class MySqlImageDao {
         }
     }
 
+    public Image readByImageByID (int imageID) throws DaoException {
+        Session session = null;
+        try {
+            session = factory.openSession();
+            Query<Image> query = session.createQuery("from Image i where i.id=:id", Image.class);
+            query.setParameter("id", imageID);
+            return query.uniqueResult();
+        } catch (HibernateException exc) {
+            throw new DaoException("Exception in MySqloImageDao object", exc);
+        } finally {
+            if (session!=null) {
+                session.close();
+            }
+        }
+    }
 
 
 }
