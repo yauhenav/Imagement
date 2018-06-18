@@ -27,7 +27,8 @@ public class Management extends HttpServlet {
         HttpSession sessionObject = req.getSession(true);
         Service servObj = (Service) sessionObject.getAttribute("sessionObject");
 
-        int imageID = 1;
+        String idNumber = req.getParameter("id");
+        int imageID = Integer.parseInt(idNumber);
         Image tempImage = servObj.readImageFromDB(imageID);
 
 
